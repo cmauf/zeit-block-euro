@@ -6,7 +6,7 @@ Hence, it is a very basic approach to not be bombarded with news that you might 
 
 ## Installation
 
-This extension can be added to Firefox via the (Extension Page)[https://addons.mozilla.org/en-US/firefox/addon/zeit-online-block-euro/].
+This extension can be added to Firefox via the [Extension Page](https://addons.mozilla.org/en-US/firefox/addon/zeit-online-block-euro/).
 
 
 ## How it works
@@ -18,7 +18,7 @@ All the elements are set to `display: none;`, so they are not rendered.
 
 ## Contributing
 Feel free to improve readability, add more sophisticated ways of blocking or idenfying elements etc. via a Pull Request.
-You can also report bugs or request features by (mailto:ahoj@mauf-clausen.de)[shooting me an e-mail].
+You can also report bugs or request features by [shooting me an e-mail](mailto:ahoj@mauf-clausen.de).
 
 Happy EURO-free browsing!
 
