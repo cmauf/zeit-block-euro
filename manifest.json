@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Zeit Online Block EURO",
+    "version": "0.1",
+
+    "description": "Blocks any news on UEFA EURO 2024 on ZEIT Online",
+
+    "icons": {
+        "48": "icons/block-euro-48.png",
+        "96": "icons/block-euro-96.png"
+    },
+
+    "content_scripts": [
+       { 
+           "matches": ["*://*.zeit.de/*"],
+           "js": ["block-euro.js"]
+        }
+    ]
+}
