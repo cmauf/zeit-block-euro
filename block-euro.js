@@ -16,7 +16,7 @@ const hasKey = (list, key) => {
 // check text for EURO content
 const hasEuro = (text, url) => {
   const euroSnippet = url
-    ? /(\/|-)(em|fussball-em|europameisterschaft|fussball-europameisterschaft)(\/|-)?/ // needs a leading hyphen or slash
+    ? /(\/|-)(em-|fussball-em|europameisterschaft|fussball-europameisterschaft)/ // needs a leading hyphen or slash
     : /.(Fußball-EM|Fußball-Europameisterschaft|UEFA EURO)./
   return euroSnippet.test(text)
 }
