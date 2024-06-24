@@ -13,16 +13,19 @@ const hasKey = (list, key) => {
   return false
 }
 
-// check URL for EURO content
-const urlHasEuro = (linkUrl) => {
-  const euroSnippet = /(\/|-)(em|fussball-em|europameisterschaft)(\/|-)?/ // needs a leading hyphen or slash
-  return euroSnippet.test(linkUrl)
+// check text for EURO content
+const hasEuro = (text, url) => {
+  const euroSnippet = url
+    ? /(\/|-)(em|fussball-em|europameisterschaft|fussball-europameisterschaft)(\/|-)?/ // needs a leading hyphen or slash
+    : /.(Fußball-EM|Fußball-Europameisterschaft|UEFA EURO)./
+  return euroSnippet.test(text)
 }
+
 
 // remove EURO from navigation topics
 const topicList = document.getElementsByClassName('navigation-topics__link')
 for (const link of topicList) {
-  if (urlHasEuro(link.href)) {
+  if (hasEuro(link.href, true)) {
     elementInvisible(link)
   }
 }
@@ -37,7 +40,7 @@ if (tickerContainer.length === 1) {
 const articles = document.getElementsByTagName('article')
 for (const article of articles) {
   if (hasKey(article.classList, 'zon-teaser') &&
-      urlHasEuro(article.children[0].href)
+     hasEuro(article.children[0].href, true)
   ) {
     if (hasKey(article.parentElement.classList, 'zon-carousel__slide')) { // is carousel element
       elementInvisible(article.parentElement)
@@ -47,10 +50,27 @@ for (const article of articles) {
   }
 }
 
+// return true if links or strong text refer to EURO
+const tickerRelateToEuro = (news) => {
+  for (const node of news.children) {
+    console.log(node)
+    if (node.nodeName === 'A' && hasEuro(node.href, true)) { // link
+      return true
+    } else if (node.nodeName === 'STRONG' && hasEuro(node.innerHTML)) { // strong tag
+      return true
+    }
+  }
+  return false
+}
+
 // check ticker news, filter out any mentioning EURO
 const tickerNews = document.getElementsByClassName('zon-markup-with-author__content') // list of HTML elements, length 1
 for (const news of tickerNews[0].children) {
-  if (news.children.length === 2 && urlHasEuro(news.children[1].href)) { // child #2 is link in ticker news
-    elementInvisible(news)
+  if (news.children.length >= 2) { // is news entry (strong and at least one link)
+    console.log(news)
+    if (tickerRelateToEuro(news)) {
+      elementInvisible(news)
+    }
+
   }
 }
